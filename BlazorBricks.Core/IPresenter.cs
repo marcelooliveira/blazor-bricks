@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MVCBricks.Core;
-using MVCBricks.Core.Shapes;
+using BlazorBricks.Core;
+using BlazorBricks.Core.Shapes;
 
-namespace MVCBricks.Core
+namespace BlazorBricks.Core
 {
     public interface IPresenter
     {

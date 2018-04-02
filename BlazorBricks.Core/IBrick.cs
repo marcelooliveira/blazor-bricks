@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MVCBricks.Core.Shapes;
+using BlazorBricks.Core.Shapes;
 //using System.Drawing;
 using System.ComponentModel;
 using System.Drawing;
 
-namespace MVCBricks.Core
+namespace BlazorBricks.Core
 {
     public interface IBrick : INotifyPropertyChanged
     {

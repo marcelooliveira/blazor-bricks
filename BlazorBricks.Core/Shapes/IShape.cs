@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 //using System.Drawing;
-using MVCBricks.Core;
+using BlazorBricks.Core;
 using System.Drawing;
 //using System.Drawing;
 
-namespace MVCBricks.Core.Shapes
+namespace BlazorBricks.Core.Shapes
 {
     public interface IShape
     {

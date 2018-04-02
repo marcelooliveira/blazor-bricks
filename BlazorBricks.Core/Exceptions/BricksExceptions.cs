@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MVCBricks.Core.Exceptions
+namespace BlazorBricks.Core.Exceptions
 {
     public class InvalidShapeSizeException : Exception
     {

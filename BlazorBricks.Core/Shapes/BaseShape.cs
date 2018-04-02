@@ -1,11 +1,11 @@
 using System;
 //using System.Drawing;
 using System.Diagnostics;
-using MVCBricks.Core;
-using MVCBricks.Core.Exceptions;
+using BlazorBricks.Core;
+using BlazorBricks.Core.Exceptions;
 using System.Drawing;
 
-namespace MVCBricks.Core.Shapes
+namespace BlazorBricks.Core.Shapes
 {
     /// <summary>
     /// Represents the base shape for Bricks game.

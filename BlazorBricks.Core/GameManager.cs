@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MVCBricks.Core
+namespace BlazorBricks.Core
 {
-    public class GameManager : MVCBricks.Core.IView
+    public class GameManager : BlazorBricks.Core.IView
     {
         private static GameManager instance = null;
         private static BricksPresenter presenter = null;
@@ -54,7 +54,7 @@ namespace MVCBricks.Core
             currentBoard.Bricks = GetBricksArray(height, width, brickArray);
         }
 
-        public void DisplayScore(int score, int hiScore, int lines, int level, MVCBricks.Core.Shapes.IShape next)
+        public void DisplayScore(int score, int hiScore, int lines, int level, BlazorBricks.Core.Shapes.IShape next)
         {
             currentBoard.Score = score;
             currentBoard.HiScore = hiScore;

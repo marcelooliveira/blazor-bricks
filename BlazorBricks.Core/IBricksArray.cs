@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MVCBricks.Core
+namespace BlazorBricks.Core
 {
     interface IBricksArray
     {

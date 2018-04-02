@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MVCBricks.Core.Shapes;
+using BlazorBricks.Core.Shapes;
 
-namespace MVCBricks.Core
+namespace BlazorBricks.Core
 {
     public interface IView
     {

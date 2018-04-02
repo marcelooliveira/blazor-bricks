@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MVCBricks.Core.Shapes
+namespace BlazorBricks.Core.Shapes
 {
     public class TShape : BaseShape
     {

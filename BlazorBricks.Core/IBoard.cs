@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 //using System.Drawing;
 using System.Text;
-using MVCBricks.Core.Shapes;
+using BlazorBricks.Core.Shapes;
 using System.Drawing;
 
-namespace MVCBricks.Core
+namespace BlazorBricks.Core
 {
     public interface IBoard
     {

@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using MVCBricks.Core.Exceptions;
-using MVCBricks.Core.Shapes;
+using BlazorBricks.Core.Exceptions;
+using BlazorBricks.Core.Shapes;
 using System.Drawing;
 
-namespace MVCBricks.Core
+namespace BlazorBricks.Core
 {
     public class BricksBoard : BaseBricksArray, IBoard
     {
