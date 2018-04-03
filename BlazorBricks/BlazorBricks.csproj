@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazorBricks.Core\BlazorBricks.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <BlazorGenerate Remove="Pages\Indexbkp.cshtml" />
   </ItemGroup>
 
@@ -27,6 +23,10 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="Shared\MainLayoutBkp.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorBricks.Core\BlazorBricks.Core.csproj" />
   </ItemGroup>
 
 </Project>
