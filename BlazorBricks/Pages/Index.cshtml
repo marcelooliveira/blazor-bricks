@@ -1,52 +1,50 @@
 ﻿@page "/"
+        <div class="screen">
+            <div id="title" class="title">
+                <img src="img/Title.png" />
+                <div class="subTitle">
+                    ©2011 Marcelo Ricardo de Oliveira<br />
+                    Made for The Code Project<img src="img/Bob.png" class="bob" />
+                </div>
+                <br />
+                <div class="press">Press SPACE to start game!</div>
+            </div>
+            <div class="centerPanel">
+                <div class="board">
+                </div>
+                <div class="scorePanel">
+                    <div>
+                        Score
+                    </div>
+                    <div id="divScore" class="scoreText">000000</div>
+                    <br />
+                    <div>
+                        HiScore
+                    </div>
+                    <div id="divHiScore" class="scoreText">000000</div>
+                    <br />
+                    <div>
+                        Lines
+                    </div>
+                    <div id="divLines" class="scoreText">0</div>
+                    <br />
+                    <div>
+                        Level
+                    </div>
+                    <div id="divLevel" class="scoreText">0</div>
+                    <br />
+                    <div>
+                        Next
+                    </div>
+                    <div id="divNext" class="scoreText"></div>
 
-<br />
-<div class="screen">
-    <div id="title" class="title">
-        <img src="img/Title.png" />
-        <div class="subTitle">
-            ©2011 Marcelo Ricardo de Oliveira<br />
-            Made for The Code Project<img src="img/Bob.png" class="bob" />
+                </div>
+            </div>
+            <div id="gamePaused">
+                GAME PAUSED<br />
+                Press SPACE to continue!
+            </div>
         </div>
-        <br />
-        <div class="press">Press SPACE to start game!</div>
-    </div>
-    <div class="centerPanel">
-        <div class="board">
-        </div>
-        <div class="scorePanel">
-            <div>
-                Score
-            </div>
-            <div id="divScore" class="scoreText">000000</div>
-            <br />
-            <div>
-                HiScore
-            </div>
-            <div id="divHiScore" class="scoreText">000000</div>
-            <br />
-            <div>
-                Lines
-            </div>
-            <div id="divLines" class="scoreText">0</div>
-            <br />
-            <div>
-                Level
-            </div>
-            <div id="divLevel" class="scoreText">0</div>
-            <br />
-            <div>
-                Next
-            </div>
-            <div id="divNext" class="scoreText"></div>
-
-        </div>
-    </div>
-    <div id="gamePaused">
-        GAME PAUSED<br />
-        Press SPACE to continue!
-    </div>
-</div>
 <div id="gameOver">
     GAME OVER<br />
     Press SPACE to restart!

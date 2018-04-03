@@ -1,96 +1,171 @@
-﻿.main-nav li .glyphicon {
-    margin-right: 10px;
+﻿html {
+    background-color: Black;
 }
 
-/* Highlighting rules for nav menu items */
-.main-nav li a.active,
-.main-nav li a.active:hover,
-.main-nav li a.active:focus {
-    background-color: #4189C7;
-    color: white;
+.row {
+    background-color: Black;
 }
 
-/* Keep the nav menu independent of scrolling and on top of other items */
-.main-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
+span {
+    padding: 0px;
+    margin: 0px;
 }
 
-@media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-    body {
-        padding-top: 50px;
-    }
+.screen {
+    margin-left: 10%;
+    margin-right: 10%;
+    position: relative;
 }
 
-@media (min-width: 768px) {
-    /* On small screens, convert the nav menu to a vertical sidebar */
-    .main-nav {
-        height: 100%;
-        width: calc(25% - 20px);
-    }
-    .main-nav .navbar {
-        border-radius: 0px;
-        border-width: 0px;
-        height: 100%;
-    }
-    .main-nav .navbar-header {
-        float: none;
-    }
-    .main-nav .navbar-collapse {
-        border-top: 1px solid #444;
-        padding: 0px;
-    }
-    .main-nav .navbar ul {
-        float: none;
-    }
-    .main-nav .navbar li {
-        float: none;
-        font-size: 15px;
-        margin: 6px;
-    }
-    .main-nav .navbar li a {
-        padding: 10px 16px;
-        border-radius: 4px;
-    }
-    .main-nav .navbar a {
-        /* If a menu item's text is too long, truncate it */
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.centerPanel {
+    width: 500px;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -250px;
+    position: relative;
 }
 
-/* 
-    Temporary workaround due to the <blazor-component> wrapper element. The wrapper element
-    will be eliminated in a future update, making this workaround unnecessary.
-*/
-.navbar-nav > li a {
-    color: #9d9d9d;
-    line-height: 20px;
+.board {
+    width: 262px;
+    left: 50%;
+    margin-left: -131px;
+    position: relative;
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0.0, #222), color-stop(0.5, #111), color-stop(1.0, #222));
+    float: left;
+    opacity: 0.0;
+    visibility: hidden;
+}
+
+.scorePanel {
+    font-family: Showcard Gothic;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: Gray;
+    position: relative;
+    display: block;
+    float: right;
+    opacity: 0.0;
+    visibility: hidden;
+}
+
+root {
+    display: block;
+}
+
+.colorChip {
+    position: relative;
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #333333;
+}
+
+.clear {
+    clear: both;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+    .clearfix:after, .container:after {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+
+* html .clearfix {
+    height: 0%;
+}
+
+.clearfix {
+    display: block;
+}
+
+.title {
+    font-family: Arial Narrow;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: Gray;
+    width: 300px;
+    left: 50%;
+    margin-left: -130px;
     position: relative;
     display: block;
 }
-.navbar-nav > li a:hover {
-    color: #fff;
-    background-color: transparent;
-    text-decoration: none;
-}
-.navbar-nav > li a:focus {
-    text-decoration: none;
-}
 
-.alert-survey {
-    color: #6a6969;
-    background-color: #e8e8e8;
-    border-color: #d3d3d3;
-    margin-top: 25px;
-}
-
-.alert-survey a {
+#gamePaused {
+    top: 300px;
+    visibility: hidden;
+    text-decoration: blink;
+    font-family: Lucida Sans;
+    font-size: 20px;
     font-weight: bold;
+    text-align: center;
+    color: Orange;
+    width: 500px;
+    left: 40%;
+    margin-left: -100px;
+    position: fixed;
+    display: block;
 }
+
+#gameOver {
+    top: 300px;
+    visibility: hidden;
+    text-decoration: blink;
+    font-family: Lucida Sans;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: Orange;
+    width: 500px;
+    left: 40%;
+    margin-left: -100px;
+    position: fixed;
+    display: block;
+}
+
+.subTitle {
+    font-family: Lucida Sans;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: Gray;
+    width: 400px;
+    left: 65%;
+    margin-left: -200px;
+    position: relative;
+    display: block;
+}
+
+.image {
+    overflow: hidden;
+    margin: 0px 0px 0px 0px;
+}
+
+.bob {
+    vertical-align: middle;
+}
+
+.press {
+    text-decoration: blink;
+    font-family: Lucida Sans;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: Orange;
+    width: 400px;
+    left: 40%;
+    margin-left: -130px;
+    position: relative;
+    display: block;
+}
+
