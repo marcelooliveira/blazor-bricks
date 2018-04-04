@@ -1,16 +1,11 @@
 ﻿@page "/"
         <div class="screen">
-            <div id="title" class="title">
-                <img src="img/Title.png" />
-                <div class="subTitle">
-                    ©2011 Marcelo Ricardo de Oliveira<br />
-                    Made for The Code Project<img src="img/Bob.png" class="bob" />
-                </div>
-                <br />
-                <div class="press">Press SPACE to start game!</div>
-            </div>
             <div class="centerPanel">
                 <div class="board">
+                    @foreach (var brick in boardViewModel.Bricks)
+                    {
+                        <span class="colorChip" style="background-color:@(brick.Color);"></span>
+                    }
                 </div>
                 <div class="scorePanel">
                     <div>
@@ -51,12 +46,24 @@
 </div>
 
 <p>@(boardViewModel.Bricks.Count())</p>
+<p>@(boardViewModel.Bricks.Count())</p>
 
 @functions {
     BlazorBricks.Core.BoardViewModel boardViewModel;
 
-    protected override void OnInit()
+    protected override async Task OnInitAsync()
     {
         boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+
+        await Task.Run(async () =>
+        {
+            while (true)
+            {
+                await Task.Delay(500);
+                BlazorBricks.Core.GameManager.Instance.Presenter.Tick();
+                boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+                this.StateHasChanged();
+            }
+        });
     }
 }

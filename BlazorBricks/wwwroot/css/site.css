@@ -1,12 +1,43 @@
-﻿html {
-    background-color: Black;
+﻿body {
+    background-color: #000;
 }
 
-.row {
-    background-color: Black;
+.screen {
+    /*margin-left: 10%;
+    margin-right: 10%;
+    position: relative;*/
 }
 
-span {
+.centerPanel {
+    /*width: 500px;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -250px;
+    position: relative;*/
+}
+
+.board {
+    width: 262px;
+    left: 50%;
+    margin-left: -131px;
+    position: relative;
+    /*background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0.0, #222), color-stop(0.5, #111), color-stop(1.0, #222));*/
+    /*float: left;*/
+    /*opacity: 0.0;*/
+}
+
+.colorChip {
+    position: relative;
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #333333;
+}
+
+/*span {
     padding: 0px;
     margin: 0px;
 }
@@ -33,9 +64,8 @@ span {
     background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0.0, #222), color-stop(0.5, #111), color-stop(1.0, #222));
     float: left;
     opacity: 0.0;
-    visibility: hidden;
-}
-
+}*/
+/*
 .scorePanel {
     font-family: Showcard Gothic;
     font-size: 20px;
@@ -46,7 +76,6 @@ span {
     display: block;
     float: right;
     opacity: 0.0;
-    visibility: hidden;
 }
 
 root {
@@ -167,5 +196,5 @@ root {
     margin-left: -130px;
     position: relative;
     display: block;
-}
+}*/
 
