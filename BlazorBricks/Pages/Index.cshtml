@@ -1,6 +1,5 @@
 ﻿@page "/"
         <div class="screen">
-            <input type="text" onkeyup="onKeyUp(this, event);"/>
             <div class="centerPanel">
                 <div class="board">
                     @foreach (var brick in boardViewModel.Bricks)
@@ -47,6 +46,7 @@
 </div>
 
 <script>
+    
     const assemblyName = 'BlazorBricks';
     const namespace = 'BlazorBricks';
     const typeName = 'OnKeyUp';
@@ -59,29 +59,44 @@
         methodName
     );
 
+    document.onkeyup = function (evt) {
+        evt = evt || window.event;
+        const keyCode = Blazor.platform.toDotNetString(evt.keyCode.toString());
+        Blazor.platform.callMethod(onkeyupMethod, null, [keyCode]);
+
+    };
+
     function onKeyUp(element, evt) {
-        console.log(evt.key);
         const char = Blazor.platform.toDotNetString(evt.key)
         Blazor.platform.callMethod(onkeyupMethod, null, [char]);
     }
 </script>
 @functions {
-    public static class OnKeyUp
-    {
-        public static Action<string> Action { get; set; }
-        public static void Handler(string value)
-        {
-            BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
-            BlazorBricks.Core.GameManager.Instance.Presenter.Tick();
-        }
-    }
-
     public BlazorBricks.Core.BoardViewModel boardViewModel;
     protected override async Task OnInitAsync()
     {
         OnKeyUp.Action = value =>
         {
-            Console.WriteLine("OnKeyUp");
+            ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
+
+            switch (consoleKey)
+            {
+                case ConsoleKey.LeftArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
+                    break;
+                case ConsoleKey.RightArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
+                    break;
+                case ConsoleKey.UpArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
+                    break;
+                case ConsoleKey.DownArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
+                    break;
+                default:
+                    break;
+            }
+            this.StateHasChanged();
         };
 
         boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
