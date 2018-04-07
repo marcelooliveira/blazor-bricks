@@ -11,7 +11,7 @@ namespace BlazorBricks.Core
     public class BricksBoard : BaseBricksArray, IBoard
     {
         #region attribute
-        protected Color backColor = Color.Black;
+        protected Color backColor = Color.LightGray;
         private IShape shape = null;
         private int score = 0;
         private int hiScore = 0;
