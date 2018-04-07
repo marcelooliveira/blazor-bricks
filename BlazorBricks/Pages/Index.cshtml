@@ -1,52 +1,30 @@
 ﻿@page "/"
-        <div class="screen">
-            <div class="centerPanel">
-                <div class="board">
-                    @foreach (var brick in boardViewModel.Bricks)
-                    {
-                        <span class="colorChip" style="background-color:@(brick.Color);"></span>
-                    }
-                </div>
-                <div class="scorePanel">
-                    <div>
-                        Score
-                    </div>
-                    <div id="divScore" class="scoreText">000000</div>
-                    <br />
-                    <div>
-                        HiScore
-                    </div>
-                    <div id="divHiScore" class="scoreText">000000</div>
-                    <br />
-                    <div>
-                        Lines
-                    </div>
-                    <div id="divLines" class="scoreText">0</div>
-                    <br />
-                    <div>
-                        Level
-                    </div>
-                    <div id="divLevel" class="scoreText">0</div>
-                    <br />
-                    <div>
-                        Next
-                    </div>
-                    <div id="divNext" class="scoreText"></div>
+<header>
+    header
+</header>
+<main>
+    <div class="left"></div>
+    <div class="middle">
 
-                </div>
-            </div>
-            <div id="gamePaused">
-                GAME PAUSED<br />
-                Press SPACE to continue!
-            </div>
+        <div class="board">
+            @foreach (var brick in boardViewModel.Bricks)
+            {
+                <span class="colorChip" style="background-color:@(brick.Color);"></span>
+            }
         </div>
-<div id="gameOver">
-    GAME OVER<br />
-    Press SPACE to restart!
-</div>
+
+    </div>
+    <div class="right"></div>
+</main>
+<footer>
+    footer
+</footer>
+
+<div class="as-console-wrapper"><div class="as-console"></div></div>
+
 
 <script>
-    
+
     const assemblyName = 'BlazorBricks';
     const namespace = 'BlazorBricks';
     const typeName = 'OnKeyUp';
@@ -72,45 +50,45 @@
     }
 </script>
 @functions {
-    public BlazorBricks.Core.BoardViewModel boardViewModel;
-    protected override async Task OnInitAsync()
+public BlazorBricks.Core.BoardViewModel boardViewModel;
+protected override async Task OnInitAsync()
+{
+    OnKeyUp.Action = value =>
     {
-        OnKeyUp.Action = value =>
-        {
-            ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
+        ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
 
-            switch (consoleKey)
-            {
-                case ConsoleKey.LeftArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
-                    break;
-                case ConsoleKey.RightArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
-                    break;
-                case ConsoleKey.UpArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
-                    break;
-                case ConsoleKey.DownArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
-                    break;
-                default:
-                    break;
-            }
+        switch (consoleKey)
+        {
+            case ConsoleKey.LeftArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
+                break;
+            case ConsoleKey.RightArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
+                break;
+            case ConsoleKey.UpArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
+                break;
+            case ConsoleKey.DownArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
+                break;
+            default:
+                break;
+        }
+        this.StateHasChanged();
+    };
+
+    boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+
+    await Task.Run(async () =>
+    {
+        while (true)
+        {
+            await Task.Delay(500);
+            BlazorBricks.Core.GameManager.Instance.Presenter.Tick();
+            boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
             this.StateHasChanged();
-        };
+        }
+    });
 
-        boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
-
-        await Task.Run(async () =>
-        {
-            while (true)
-            {
-                await Task.Delay(500);
-                BlazorBricks.Core.GameManager.Instance.Presenter.Tick();
-                boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
-                this.StateHasChanged();
-            }
-        });
-
-    }
+}
 }

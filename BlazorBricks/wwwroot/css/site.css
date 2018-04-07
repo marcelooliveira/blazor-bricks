@@ -1,33 +1,46 @@
 ﻿body {
-    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.screen {
-    /*margin-left: 10%;
-    margin-right: 10%;
-    position: relative;*/
+header {
+    flex: 0 0 100px;
+    background-color: #C14F4F;
 }
 
-.centerPanel {
-    /*width: 500px;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -250px;
-    position: relative;*/
+main {
+    flex: 1;
+    display: flex;
+    background-color: #699EBD;
 }
+
+footer {
+    flex: 0 0 40px;
+    background-color: #C14F4F;
+}
+
+.left, .right {
+    flex: 0 2 150px;
+    background-color: #C28282;
+}
+
+.middle {
+    flex: 1 1 300px;
+}
+
+
+
+
+
+
+
 
 .board {
     width: 262px;
-    left: 50%;
-    margin-left: -131px;
-    position: relative;
-    /*background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0.0, #222), color-stop(0.5, #111), color-stop(1.0, #222));*/
-    /*float: left;*/
-    /*opacity: 0.0;*/
 }
 
 .colorChip {
-    position: relative;
     float: left;
     width: 20px;
     height: 20px;
@@ -37,164 +50,4 @@
     border-color: #333333;
 }
 
-/*span {
-    padding: 0px;
-    margin: 0px;
-}
-
-.screen {
-    margin-left: 10%;
-    margin-right: 10%;
-    position: relative;
-}
-
-.centerPanel {
-    width: 500px;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -250px;
-    position: relative;
-}
-
-.board {
-    width: 262px;
-    left: 50%;
-    margin-left: -131px;
-    position: relative;
-    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0.0, #222), color-stop(0.5, #111), color-stop(1.0, #222));
-    float: left;
-    opacity: 0.0;
-}*/
-/*
-.scorePanel {
-    font-family: Showcard Gothic;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: Gray;
-    position: relative;
-    display: block;
-    float: right;
-    opacity: 0.0;
-}
-
-root {
-    display: block;
-}
-
-.colorChip {
-    position: relative;
-    float: left;
-    width: 20px;
-    height: 20px;
-    margin: 2px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #333333;
-}
-
-.clear {
-    clear: both;
-}
-
-.clearfix {
-    display: inline-block;
-}
-
-    .clearfix:after, .container:after {
-        clear: both;
-        content: ".";
-        display: block;
-        height: 0;
-        visibility: hidden;
-    }
-
-* html .clearfix {
-    height: 0%;
-}
-
-.clearfix {
-    display: block;
-}
-
-.title {
-    font-family: Arial Narrow;
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    color: Gray;
-    width: 300px;
-    left: 50%;
-    margin-left: -130px;
-    position: relative;
-    display: block;
-}
-
-#gamePaused {
-    top: 300px;
-    visibility: hidden;
-    text-decoration: blink;
-    font-family: Lucida Sans;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: Orange;
-    width: 500px;
-    left: 40%;
-    margin-left: -100px;
-    position: fixed;
-    display: block;
-}
-
-#gameOver {
-    top: 300px;
-    visibility: hidden;
-    text-decoration: blink;
-    font-family: Lucida Sans;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: Orange;
-    width: 500px;
-    left: 40%;
-    margin-left: -100px;
-    position: fixed;
-    display: block;
-}
-
-.subTitle {
-    font-family: Lucida Sans;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    color: Gray;
-    width: 400px;
-    left: 65%;
-    margin-left: -200px;
-    position: relative;
-    display: block;
-}
-
-.image {
-    overflow: hidden;
-    margin: 0px 0px 0px 0px;
-}
-
-.bob {
-    vertical-align: middle;
-}
-
-.press {
-    text-decoration: blink;
-    font-family: Lucida Sans;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: Orange;
-    width: 400px;
-    left: 40%;
-    margin-left: -130px;
-    position: relative;
-    display: block;
-}*/
 
