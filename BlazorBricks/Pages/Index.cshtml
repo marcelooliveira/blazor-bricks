@@ -1,9 +1,36 @@
 ﻿@page "/"
 <header>
-    header
+    HEADER
 </header>
 <main>
-    <div class="left"></div>
+    <div class="left">
+
+        <div class="stats">
+            <div class="statsLine">
+                <div>Score</div>
+                <hr />
+                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Score)</div>
+            </div>
+
+            <div class="statsLine">
+                <div>HiScore</div>
+                <hr />
+                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.HiScore)</div>
+            </div>
+
+            <div class="statsLine">
+                <div>Lines</div>
+                <hr />
+                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Lines)</div>
+            </div>
+
+            <div class="statsLine">
+                <div>Level</div>
+                <hr />
+                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)</div>
+            </div>
+        </div>
+    </div>
     <div class="middle">
 
         <div class="board">
@@ -14,10 +41,29 @@
         </div>
 
     </div>
-    <div class="right"></div>
+    <div class="right">
+        @{
+            var rows = boardViewModel.Next.Max(n => n.Row) + 1;
+            var columns = boardViewModel.Next.Max(n => n.Col) + 1;
+        }
+        <div class="stats">
+            <div class="statsLine">
+                <div>Next</div>
+                <hr />
+                <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
+                    @{
+                        foreach (var brick in boardViewModel.Next)
+                        {
+                            <span class="colorChip" style="background-color:@(brick.Color);"></span>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <footer>
-    footer
+    FOOTER
 </footer>
 
 <div class="as-console-wrapper"><div class="as-console"></div></div>
