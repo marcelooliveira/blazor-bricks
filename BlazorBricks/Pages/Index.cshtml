@@ -47,19 +47,21 @@
             var columns = boardViewModel.Next.Max(n => n.Col) + 1;
         }
         <div class="stats">
-            <div class="statsLine">
+            <div class="statsLine next-container">
                 <div>Next</div>
                 <hr />
-                <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
-                    @{
-                        foreach (var brick in boardViewModel.Next)
-                        {
-                            <span class="colorChip" style="background-color:@(brick.Color);"></span>
+                <div>
+                    <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
+                        @{
+                            foreach (var brick in boardViewModel.Next)
+                            {
+                                <span class="colorChip" style="background-color:@(brick.Color);"></span>
+                            }
                         }
-                    }
+                    </div>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
 </main>
 <footer>

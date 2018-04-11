@@ -59,6 +59,10 @@ footer {
     margin: 2px;
 }
 
+.next-container {
+    display: flex;
+    flex-flow: column;
+}
 
 
 

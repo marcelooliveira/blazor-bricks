@@ -29,4 +29,10 @@
     <BlazorGenerate Remove="Pages\Index.cshtml" />
   </ItemGroup>
 
+  <Target Name="BeforeBuild">
+    <!-- Remove obj folder -->
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+    <!-- Remove bin folder -->
+    <RemoveDir Directories="$(BaseOutputPath)" />
+  </Target>
 </Project>
