@@ -15,23 +15,23 @@ blazor-component {
 
 header {
     flex: 0 0 80px;
-    background-color: #888;
+    background-color: #f90;
 }
 
 main {
     flex: 1;
     display: flex;
-    background-color: #ddd;
+    background-color: #fff;
 }
 
 footer {
     flex: 0 0 80px;
-    background-color: #888;
+    background-color: #f90;
 }
 
 .left, .right {
     flex: 0 2 150px;
-    background-color: #ccc;
+    background-color: #fff;
 }
 
 .middle {
@@ -53,7 +53,7 @@ footer {
 }
 
 .statsLine {
-    background-color: aquamarine;
+    background-color: #fff;
     text-align: center;
     align-items: center;
     margin: 2px;
