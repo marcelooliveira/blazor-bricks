@@ -18,6 +18,10 @@ header {
     background-color: #f90;
 }
 
+.wa-logo {
+    height: 64px;
+}
+
 main {
     flex: 1;
     display: flex;
@@ -25,8 +29,10 @@ main {
 }
 
 footer {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
     flex: 0 0 80px;
-    background-color: #f90;
 }
 
 .left, .right {
