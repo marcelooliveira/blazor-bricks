@@ -73,7 +73,8 @@ footer {
 
 
 .board {
-    width: 262px;
+    width: 220px;
+    background-color: white;
 }
 
 .next-piece.piece-columns-2 {
@@ -92,9 +93,9 @@ footer {
     float: left;
     width: 20px;
     height: 20px;
-    margin: 2px;
-    border-style: solid;
+    margin: 0.5px;
+    /*border-style: solid;
     border-width: 1px;
-    border-color: #333333;
+    border-color: black;*/
 }
 

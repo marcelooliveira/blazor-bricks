@@ -26,7 +26,7 @@ namespace BlazorBricks.Core
         {
             this.presenter = presenter;
             this.width = 10;
-            this.height = 16;
+            this.height = 20;
             InitializeArray();
             next = GetRandomShape();
         }

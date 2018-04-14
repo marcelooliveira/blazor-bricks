@@ -14,7 +14,7 @@ namespace BlazorBricks.Core.Shapes
     {
         protected int x = 0;
         protected int y = 0;
-        protected Color color = Color.White;
+        protected Color color = Color.Black;
         protected bool anchored = false;
         protected IBoard containerBoard = null;
 

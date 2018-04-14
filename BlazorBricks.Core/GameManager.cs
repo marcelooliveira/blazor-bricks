@@ -87,7 +87,7 @@ namespace BlazorBricks.Core
                         {
                             Row = row,
                             Col = col,
-                            Color = "rgba(0, 0, 0, 0.0)"
+                            Color = "rgba(0, 0, 0, 1.0)"
                         });
                     }
                 }
