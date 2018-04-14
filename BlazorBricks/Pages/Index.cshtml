@@ -98,45 +98,55 @@
     }
 </script>
 @functions {
-public BlazorBricks.Core.BoardViewModel boardViewModel;
-protected override async Task OnInitAsync()
-{
-    OnKeyUp.Action = value =>
+    public BlazorBricks.Core.BoardViewModel boardViewModel;
+    protected override async Task OnInitAsync()
     {
-        ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
-
-        switch (consoleKey)
+        OnKeyUp.Action = async value =>
         {
-            case ConsoleKey.LeftArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
-                break;
-            case ConsoleKey.RightArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
-                break;
-            case ConsoleKey.UpArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
-                break;
-            case ConsoleKey.DownArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
-                break;
-            default:
-                break;
-        }
-        this.StateHasChanged();
-    };
+            ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
 
-    boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
-
-    await Task.Run(async () =>
-    {
-        while (true)
-        {
-            await Task.Delay(500);
-            BlazorBricks.Core.GameManager.Instance.Presenter.Tick();
-            boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+            switch (consoleKey)
+            {
+                case ConsoleKey.LeftArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
+                    break;
+                case ConsoleKey.RightArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
+                    break;
+                case ConsoleKey.UpArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
+                    break;
+                case ConsoleKey.DownArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
+                    break;
+                default:
+                    break;
+            }
             this.StateHasChanged();
-        }
-    });
+        };
 
-}
+        boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+
+        //await Task.Run(async () =>
+        //{
+        //    while (true)
+        //    {
+        //        await Task.Delay(500);
+        //        this.StateHasChanged();
+
+        //        //BlazorBricks.Core.GameManager.Instance.Presenter.Tick();
+        //    }
+        //});
+
+        Object thisLock = new Object();
+        BlazorBricks.Core.GameManager.Instance.Presenter.Updated
+        += (obj, e) =>
+        {
+            lock (thisLock)
+            {
+                boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+                this.StateHasChanged();
+            };
+        };
+    }
 }

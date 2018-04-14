@@ -5,11 +5,14 @@ using System.Text;
 using BlazorBricks.Core.Exceptions;
 using BlazorBricks.Core.Shapes;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace BlazorBricks.Core
 {
     public class BricksBoard : BaseBricksArray, IBoard
     {
+        public event EventHandler Updated;
+
         #region attribute
         protected Color backColor = Color.LightGray;
         private IShape shape = null;
@@ -229,6 +232,7 @@ namespace BlazorBricks.Core
             if (!couldMoveDown)
             {
                 RemoveCompletedRows();
+                DownPressed = false;
             }
 
             if (presenter != null)
@@ -342,19 +346,19 @@ namespace BlazorBricks.Core
 
         public bool MoveDown()
         {
-            if (shape == null)
+            if (shape == null || DownPressed)
             {
                 return false;
             }
-            else
+
+            DownPressed = true;
+            bool ret = shape.MoveDown();
+            if (shape.Anchored)
             {
-                bool ret = shape.MoveDown();
-                if (shape.Anchored)
-                {
-                    RemoveCompletedRows();
-                }
-                return ret;
+                DownPressed = false;
+                RemoveCompletedRows();
             }
+            return ret;
         }
 
         public bool Rotate90()
@@ -380,6 +384,8 @@ namespace BlazorBricks.Core
                 return shape.Rotate270();
             }
         }
+
+        public bool ShapeIsAnchored() => shape.Anchored;
 
         #endregion methods
 
@@ -409,6 +415,9 @@ namespace BlazorBricks.Core
         {
             get { return isPlaying; }
         }
+
+        public bool DownPressed { get; private set; } = false;
+
         #endregion properties
     }
 }

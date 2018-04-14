@@ -15,6 +15,6 @@ namespace BlazorBricks.Core
         int Level { get; }
         void InitializeBoard();
         void GameOver();
-        void Tick();
+        void Tick(bool processMove = false);
     }
 }

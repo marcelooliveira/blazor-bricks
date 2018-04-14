@@ -1,9 +1,11 @@
 ﻿body {
     display: flex;
+    background-color: black;
     flex-direction: column;
     min-height: 100vh;
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
+    color: white;
 }
 
 blazor-component {
@@ -25,7 +27,7 @@ header {
 main {
     flex: 1;
     display: flex;
-    background-color: #fff;
+    background-color: #000;
 }
 
 footer {
@@ -37,7 +39,6 @@ footer {
 
 .left, .right {
     flex: 0 2 150px;
-    background-color: #fff;
 }
 
 .middle {
@@ -59,7 +60,6 @@ footer {
 }
 
 .statsLine {
-    background-color: #fff;
     text-align: center;
     align-items: center;
     margin: 2px;
@@ -73,7 +73,7 @@ footer {
 
 
 .board {
-    width: 220px;
+    width: 212px;
     background-color: white;
 }
 

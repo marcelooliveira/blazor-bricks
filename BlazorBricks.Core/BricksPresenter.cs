@@ -1,19 +1,50 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using BlazorBricks.Core.Shapes;
 
 namespace BlazorBricks.Core
 {
     public class BricksPresenter : IPresenter
     {
+        public event EventHandler Updated;
+
         private IView view;
         private BricksBoard BricksBoard;
-
+        private TimeSpan accumulatedTimeSpan = TimeSpan.FromMilliseconds(0);
+        private const int TICK_MS_INTERVAL = 25;
+        private const int PROCESS_NEXT_MOVEMENT_MS_INTERVAL = 300;
+        
         public BricksPresenter(IView view)
         {
             this.view = view;
             BricksBoard = new BricksBoard(this);
+            BricksBoard.Updated += (obj, e) =>
+            {
+                Updated?.Invoke(this, e);
+            };
+
+            TickLoop();
+        }
+
+        private async Task TickLoop()
+        {
+            await Task.Run(async () =>
+            {
+                while (true)
+                {
+                    await Task.Delay(TICK_MS_INTERVAL);
+                    bool processMove = BricksBoard.DownPressed;
+                    accumulatedTimeSpan = accumulatedTimeSpan.Add(TimeSpan.FromMilliseconds(TICK_MS_INTERVAL));
+                    if (accumulatedTimeSpan.TotalMilliseconds >= PROCESS_NEXT_MOVEMENT_MS_INTERVAL)
+                    {
+                        processMove = true;
+                        accumulatedTimeSpan = TimeSpan.FromMilliseconds(0);
+                    }
+                    Tick(processMove);
+                }
+            });
         }
 
         public IView View
@@ -55,7 +86,7 @@ namespace BlazorBricks.Core
         {
             return BricksBoard.MoveRight();
         }
-
+        
         public bool MoveDown()
         {
             return BricksBoard.MoveDown();
@@ -81,9 +112,13 @@ namespace BlazorBricks.Core
             view.GameOver();
         }
 
-        public void Tick()
+        public void Tick(bool processMove = false)
         {
-            BricksBoard.ProcessNextMove();
+            if (processMove)
+            {
+                BricksBoard.ProcessNextMove();
+            }
+            Updated?.Invoke(this, new EventArgs());
         }
 
         public int Width
@@ -105,6 +140,7 @@ namespace BlazorBricks.Core
         {
             get { return BricksBoard.IsPlaying; }
         }
+
     }
 
     public enum ShapeCodes
