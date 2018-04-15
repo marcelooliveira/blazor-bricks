@@ -411,11 +411,6 @@ namespace BlazorBricks.Core
             get { return level; }
         }
 
-        public bool IsPlaying
-        {
-            get { return isPlaying; }
-        }
-
         public bool DownPressed { get; private set; } = false;
 
         #endregion properties

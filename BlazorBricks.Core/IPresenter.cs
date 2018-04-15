@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using BlazorBricks.Core;
 using BlazorBricks.Core.Shapes;
 
@@ -16,5 +17,6 @@ namespace BlazorBricks.Core
         void InitializeBoard();
         void GameOver();
         void Tick(bool processMove = false);
+        Task StartTickLoop();
     }
 }

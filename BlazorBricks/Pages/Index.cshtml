@@ -28,17 +28,37 @@
                 <hr />
                 <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)</div>
             </div>
+
+            <div class="statsLine">
+                <div>isGameOver</div>
+                <hr />
+                <div>@isGameOver</div>
+            </div>
         </div>
 
     </div>
     <div class="middle">
 
-        <div class="board">
-            @foreach (var brick in boardViewModel.Bricks)
-            {
-                <span class="colorChip" style="background-color:@(brick.Color);"></span>
-            }
-        </div>
+        @if (BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver)
+        {
+            <div>
+                <div>
+                    <strong>GAME OVER</strong>
+                </div>
+                <div>
+                    <button @onclick(StartTickLoop)>Play Again</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="board">
+                @foreach (var brick in boardViewModel.Bricks)
+                {
+                    <span class="colorChip" style="background-color:@(brick.Color);"></span>
+                }
+            </div>
+        }
 
     </div>
     <div class="right">
@@ -65,6 +85,7 @@
     </div>
 </main>
 <footer>
+    <div>isGameOver = @isGameOver</div>
     <img class="wa-logo" src="/img/WebAssembly.svg" />
 </footer>
 
@@ -98,6 +119,7 @@
     }
 </script>
 @functions {
+    bool isGameOver = true;
     public BlazorBricks.Core.BoardViewModel boardViewModel;
     protected override async Task OnInitAsync()
     {
@@ -138,6 +160,7 @@
         //    }
         //});
 
+
         Object thisLock = new Object();
         BlazorBricks.Core.GameManager.Instance.Presenter.Updated
         += (obj, e) =>
@@ -148,5 +171,20 @@
                 this.StateHasChanged();
             };
         };
+    }
+
+    void InitializeBoard()
+    {
+        BlazorBricks.Core.GameManager.Instance.Presenter.InitializeBoard();
+        boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+
+        isGameOver = BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver;
+
+        this.StateHasChanged();
+    }
+
+    public void StartTickLoop()
+    {
+        InitializeBoard();
     }
 }

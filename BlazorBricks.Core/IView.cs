@@ -11,5 +11,6 @@ namespace BlazorBricks.Core
         void DisplayScore(int score, int hiScore, int lines, int level, IShape next);
         void GameOver();
         void HighlightCompletedRow(int row);
+        void Reset();
     }
 }

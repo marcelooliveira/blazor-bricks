@@ -17,8 +17,8 @@ namespace BlazorBricks.Core
             currentBoard.Bricks = new BrickViewModel[] { };
 
             presenter = new BricksPresenter(this);
-            presenter.InitializeBoard();
-            presenter.Tick();
+            //presenter.InitializeBoard();
+            //presenter.Tick();
         }
 
         public static GameManager Instance
@@ -104,6 +104,11 @@ namespace BlazorBricks.Core
         {
             //throw new NotImplementedException();
         }
+
+        public void Reset()
+        {
+            currentBoard.IsGameOver = false;
+        }
     }
 
     public class BrickViewModel
@@ -117,7 +122,7 @@ namespace BlazorBricks.Core
     {
         public BoardViewModel()
         {
-            IsGameOver = false;
+            IsGameOver = true;
         }
 
         public BrickViewModel[] Bricks { get; set; }
