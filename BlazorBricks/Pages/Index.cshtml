@@ -1,124 +1,118 @@
 ﻿@page "/"
-<header>
-</header>
-<main>
-    <div class="left">
+<div class="inside-page">
+    <header></header>
+    <main>
+        <div class="left">
 
-        <div class="stats">
-            <div class="statsLine">
-                <div>Score</div>
-                <hr />
-                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Score)</div>
+            <div class="stats">
+                <div class="statsLine">
+                    <div>Score</div>
+                    <hr />
+                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Score)</div>
+                </div>
+
+                <div class="statsLine">
+                    <div>HiScore</div>
+                    <hr />
+                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.HiScore)</div>
+                </div>
+
+                <div class="statsLine">
+                    <div>Lines</div>
+                    <hr />
+                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Lines)</div>
+                </div>
+
+                <div class="statsLine">
+                    <div>Level</div>
+                    <hr />
+                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)</div>
+                </div>
+
             </div>
 
-            <div class="statsLine">
-                <div>HiScore</div>
-                <hr />
-                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.HiScore)</div>
-            </div>
-
-            <div class="statsLine">
-                <div>Lines</div>
-                <hr />
-                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Lines)</div>
-            </div>
-
-            <div class="statsLine">
-                <div>Level</div>
-                <hr />
-                <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)</div>
-            </div>
-
-            <div class="statsLine">
-                <div>isGameOver</div>
-                <hr />
-                <div>@isGameOver</div>
-            </div>
         </div>
+        <div class="middle">
 
-    </div>
-    <div class="middle">
-
-        @if (BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver)
-        {
-            <div>
+            @if (BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver)
+            {
                 <div>
-                    <strong>GAME OVER</strong>
+                    <div>
+                        <strong>GAME OVER</strong>
+                    </div>
+                    <div>
+                        <button @onclick(StartTickLoop)>Play Again</button>
+                    </div>
                 </div>
-                <div>
-                    <button @onclick(StartTickLoop)>Play Again</button>
+            }
+            else
+            {
+                <div class="board">
+                    @foreach (var brick in boardViewModel.Bricks)
+                    {
+                        <Brick Color="@brick.Color"></Brick>
+                    }
                 </div>
-            </div>
-        }
-        else
-        {
-            <div class="board">
-                @foreach (var brick in boardViewModel.Bricks)
-                {
-                    <span class="colorChip" style="background-color:@(brick.Color);"></span>
-                }
-            </div>
-        }
+            }
 
-    </div>
-    <div class="right">
-        @{
-            var rows = boardViewModel.Next.Max(n => n.Row) + 1;
-            var columns = boardViewModel.Next.Max(n => n.Col) + 1;
-        }
-        <div class="stats">
-            <div class="statsLine next-container">
-                <div>Next</div>
-                <hr />
-                <div>
-                    <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
-                        @{
-                            foreach (var brick in boardViewModel.Next)
-                            {
-                                <span class="colorChip" style="background-color:@(brick.Color);"></span>
+        </div>
+        <div class="right">
+            @{
+                var rows = boardViewModel.Next.Max(n => n.Row) + 1;
+                var columns = boardViewModel.Next.Max(n => n.Col) + 1;
+            }
+            <div class="stats">
+                <div class="statsLine next-container">
+                    <div>Next</div>
+                    <hr />
+                    <div>
+                        <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
+                            @{
+                                foreach (var brick in boardViewModel.Next)
+                                {
+                                    <Brick Color="@(brick.Color)" />
+                                }
                             }
-                        }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-<footer>
-    <div>isGameOver = @isGameOver</div>
-    <img class="wa-logo" src="/img/WebAssembly.svg" />
-</footer>
-
+    </main>
+    <footer>
+        <img class="wa-logo" src="/img/WebAssembly.svg" />
+    </footer>
+</div>
 <div class="as-console-wrapper"><div class="as-console"></div></div>
 
 
-<script>
+    <script>
 
-    const assemblyName = 'BlazorBricks';
-    const namespace = 'BlazorBricks';
-    const typeName = 'OnKeyUp';
-    const methodName = 'Handler';
+        const assemblyName = 'BlazorBricks';
+        const namespace = 'BlazorBricks';
+        const typeName = 'OnKeyUp';
+        const methodName = 'Handler';
 
-    const onkeyupMethod = Blazor.platform.findMethod(
-        assemblyName,
-        namespace,
-        typeName,
-        methodName
-    );
+        const onkeyupMethod = Blazor.platform.findMethod(
+            assemblyName,
+            namespace,
+            typeName,
+            methodName
+        );
 
-    document.onkeyup = function (evt) {
-        evt = evt || window.event;
-        const keyCode = Blazor.platform.toDotNetString(evt.keyCode.toString());
-        Blazor.platform.callMethod(onkeyupMethod, null, [keyCode]);
+        document.onkeyup = function (evt) {
+            evt = evt || window.event;
+            const keyCode = Blazor.platform.toDotNetString(evt.keyCode.toString());
+            Blazor.platform.callMethod(onkeyupMethod, null, [keyCode]);
 
-    };
+        };
 
-    function onKeyUp(element, evt) {
-        const char = Blazor.platform.toDotNetString(evt.key)
-        Blazor.platform.callMethod(onkeyupMethod, null, [char]);
-    }
-</script>
-@functions {
+        function onKeyUp(element, evt) {
+            const char = Blazor.platform.toDotNetString(evt.key)
+            Blazor.platform.callMethod(onkeyupMethod, null, [char]);
+        }
+    </script>
+    @functions {
     bool isGameOver = true;
     public BlazorBricks.Core.BoardViewModel boardViewModel;
     protected override async Task OnInitAsync()
@@ -187,4 +181,4 @@
     {
         InitializeBoard();
     }
-}
+    }

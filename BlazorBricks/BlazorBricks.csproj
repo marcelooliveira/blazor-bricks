@@ -35,4 +35,8 @@
     <!-- Remove bin folder -->
     <RemoveDir Directories="$(BaseOutputPath)" />
   </Target>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Shared\Brick.cshtml" />
+  </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ namespace BlazorBricks.Core
         private BricksBoard BricksBoard;
         private TimeSpan accumulatedTimeSpan = TimeSpan.FromMilliseconds(0);
         private CancellationTokenSource cancellationTokenSource;
-        private const int TICK_MS_INTERVAL = 10;
+        private const int TICK_MS_INTERVAL = 30;
         private const int PROCESS_NEXT_MOVEMENT_MS_INTERVAL = 150;
 
         public bool IsGameOver { get; private set; } = true;
