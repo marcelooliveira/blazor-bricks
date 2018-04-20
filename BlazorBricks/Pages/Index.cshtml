@@ -48,10 +48,7 @@
             else
             {
                 <div class="board">
-                    @foreach (var brick in boardViewModel.Bricks)
-                    {
-                        <Brick Color="@brick.Color"></Brick>
-                    }
+                    <BricksBoard Bricks="@boardViewModel.Bricks"/>
                 </div>
             }
 
@@ -67,12 +64,7 @@
                     <hr />
                     <div>
                         <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
-                            @{
-                                foreach (var brick in boardViewModel.Next)
-                                {
-                                    <Brick Color="@(brick.Color)" />
-                                }
-                            }
+                            <BricksBoard Bricks="@boardViewModel.Next" />
                         </div>
                     </div>
                 </div>

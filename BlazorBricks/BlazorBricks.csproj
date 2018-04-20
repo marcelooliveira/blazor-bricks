@@ -39,4 +39,8 @@
   <ItemGroup>
     <BlazorGenerate Remove="Shared\Brick.cshtml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Shared\BricksBoard.cshtml" />
+  </ItemGroup>
 </Project>
