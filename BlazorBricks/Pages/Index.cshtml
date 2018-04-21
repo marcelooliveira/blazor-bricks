@@ -7,30 +7,17 @@
         <div class="left">
 
             <div class="stats">
-                <div class="statsLine">
-                    <div>Score</div>
-                    <hr />
-                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Score)</div>
-                </div>
+                <StatsInfo Label="Score"
+                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Score)" />
 
-                <div class="statsLine">
-                    <div>HiScore</div>
-                    <hr />
-                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.HiScore)</div>
-                </div>
+                <StatsInfo Label="Hi Score"
+                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.HiScore)" />
 
-                <div class="statsLine">
-                    <div>Lines</div>
-                    <hr />
-                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Lines)</div>
-                </div>
+                <StatsInfo Label="Lines"
+                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Lines)" />
 
-                <div class="statsLine">
-                    <div>Level</div>
-                    <hr />
-                    <div>@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)</div>
-                </div>
-
+                <StatsInfo Label="Level"
+                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)" />
             </div>
 
         </div>
