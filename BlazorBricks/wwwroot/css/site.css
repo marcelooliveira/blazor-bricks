@@ -25,6 +25,12 @@ main {
     align-items: center;
     justify-content: center;
     min-height: 420px;
+    align-content: center;
+    text-align: center;
+}
+
+aside {
+    text-align: center;
 }
 
 article {
