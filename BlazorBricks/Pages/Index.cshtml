@@ -2,26 +2,25 @@
 <div class="inside-page">
     <header>
         <img src="img/Title.png" />
+        <img src="img/Bob.png" class="bob"/>
     </header>
-    <main>
-        <div class="left">
-
+    <div class="HolyGrail-body">
+        <nav>
             <div class="stats">
-                <StatsInfo Label="Score"
+                <StatsInfo Label="SCORE"
                            Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Score)" />
 
-                <StatsInfo Label="Hi Score"
+                <StatsInfo Label="HI SCORE"
                            Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.HiScore)" />
 
-                <StatsInfo Label="Lines"
+                <StatsInfo Label="LINES"
                            Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Lines)" />
 
-                <StatsInfo Label="Level"
+                <StatsInfo Label="LEVEL"
                            Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)" />
             </div>
-
-        </div>
-        <div class="middle">
+        </nav>
+        <main>
 
             @if (BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver)
             {
@@ -30,26 +29,26 @@
                         <strong>GAME OVER</strong>
                     </div>
                     <div>
-                        <button @onclick(StartTickLoop)>Play Again</button>
+                        <button @onclick(StartTickLoop)>PLAY AGAIN</button>
                     </div>
                 </div>
             }
             else
             {
                 <div class="board">
-                    <BricksBoard Bricks="@boardViewModel.Bricks"/>
+                    <BricksBoard Bricks="@boardViewModel.Bricks" />
                 </div>
             }
 
-        </div>
-        <div class="right">
+        </main>
+        <aside>
             @{
                 var rows = boardViewModel.Next.Max(n => n.Row) + 1;
                 var columns = boardViewModel.Next.Max(n => n.Col) + 1;
             }
             <div class="stats">
                 <div class="statsLine next-container">
-                    <div>Next</div>
+                    <div>NEXT</div>
                     <hr />
                     <div>
                         <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
@@ -58,8 +57,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </aside>
+    </div>
     <footer>
         <img class="wa-logo" src="/img/WebAssembly.svg" />
     </footer>
@@ -123,18 +122,6 @@
         };
 
         boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
-
-        //await Task.Run(async () =>
-        //{
-        //    while (true)
-        //    {
-        //        await Task.Delay(500);
-        //        this.StateHasChanged();
-
-        //        //BlazorBricks.Core.GameManager.Instance.Presenter.Tick();
-        //    }
-        //});
-
 
         Object thisLock = new Object();
         BlazorBricks.Core.GameManager.Instance.Presenter.Updated

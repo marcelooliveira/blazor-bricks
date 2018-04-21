@@ -1,43 +1,61 @@
-﻿body {
+﻿html {
+    color: black;
+}
+
+@font-face {
+    font-family: 'arcadepi';
+    src: url('fonts/arcadepi.ttf') format('truetype');
+}
+
+body {
     display: flex;
-    background-color: black;
-    flex-direction: column;
     min-height: 100vh;
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
+    flex-direction: column;
+    font-family: arcadepi;
+    font-size: 20px;
     color: white;
-}
-
-blazor-component {
-    /*min-height: 100vh;*/
-}
-
-.inside-page {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-header {
-    flex: 0 0 80px;
-    background-color: #f90;
-}
-
-.wa-logo {
-    height: 64px;
+    background-color: black;
 }
 
 main {
     flex: 1;
     display: flex;
-    background-color: #000;
+    background-color: #111;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+}
+
+article {
+    flex: 1
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-content: space-around;
+    flex-direction: row;
+    flex: 1;
+}
+
+header,
+footer {
+    --codeproject-bg-color: #f90;
+    background: var(--codeproject-bg-color);
+    /*height: 20vh;*/
+    padding: 10px;
+}
+
+article {
+    padding: 10px;
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 footer {
@@ -47,16 +65,36 @@ footer {
     flex: 0 0 80px;
 }
 
-.left, .right {
-    flex: 0 2 150px;
+.wa-logo {
+    height: 64px;
 }
 
-.middle {
-    flex: 1 1 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.bob {
+    align-self: flex-end;
+    justify-content: flex-end;
+    width: 42px;
+    height: 48px;
 }
+
+.inside-page {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+}
+
+app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+
+
+
+
+
 
 
 
@@ -84,7 +122,7 @@ footer {
 
 .board {
     width: 212px;
-    background-color: white;
+    background-color: #444;
 }
 
 .next-piece.piece-columns-2 {
@@ -104,8 +142,37 @@ footer {
     width: 20px;
     height: 20px;
     margin: 0.5px;
-    /*border-style: solid;
-    border-width: 1px;
-    border-color: black;*/
 }
 
+.HolyGrail {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.HolyGrail-body {
+    display: flex;
+    flex: 1;
+}
+
+main {
+    flex: 1;
+}
+
+nav, aside {
+    /* 12em is the width of the columns */
+    flex: 0 0 12em;
+    background: #000;
+    padding: 10px;
+    width: 20vw;
+}
+
+nav {
+    /* put the nav on the left */
+    order: -1;
+}
+
+button {
+    font-size: 20px;
+    font-family: arcadepi;
+}
