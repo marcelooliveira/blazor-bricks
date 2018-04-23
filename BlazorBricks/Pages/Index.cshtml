@@ -2,7 +2,6 @@
 <div class="inside-page">
     <header>
         <img src="img/Title.png" />
-        <img src="img/Bob.png" class="bob"/>
     </header>
     <div class="HolyGrail-body">
         <nav>
@@ -26,10 +25,22 @@
             {
                 <div>
                     <div>
-                        <strong>GAME OVER</strong>
+                        <button @onclick(StartTickLoop)>START NEW GAME</button>
                     </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div>BLAZOR BRICKS</div>
+                    <div>©2018 MARCELO RICARDO DE OLIVEIRA</div>
+                    <br />
+                    <br />
                     <div>
-                        <button @onclick(StartTickLoop)>PLAY AGAIN</button>
+                        MADE FOR CODE PROJECT <br />
+                        (<span><a target="_blank" href="http://www.codeproject.com">http://www.codeproject.com</a></span>)
+                    </div>
+                    <br />
+                    <div>
+                        <img src="img/Bob.png" class="bob" />
                     </div>
                 </div>
             }
@@ -66,87 +77,87 @@
 <div class="as-console-wrapper"><div class="as-console"></div></div>
 
 
-    <script>
+<script>
 
-        const assemblyName = 'BlazorBricks';
-        const namespace = 'BlazorBricks';
-        const typeName = 'OnKeyUp';
-        const methodName = 'Handler';
+    const assemblyName = 'BlazorBricks';
+    const namespace = 'BlazorBricks';
+    const typeName = 'OnKeyUp';
+    const methodName = 'Handler';
 
-        const onkeyupMethod = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
+    const onkeyupMethod = Blazor.platform.findMethod(
+        assemblyName,
+        namespace,
+        typeName,
+        methodName
+    );
 
-        document.onkeyup = function (evt) {
-            evt = evt || window.event;
-            const keyCode = Blazor.platform.toDotNetString(evt.keyCode.toString());
-            Blazor.platform.callMethod(onkeyupMethod, null, [keyCode]);
+    document.onkeyup = function (evt) {
+        evt = evt || window.event;
+        const keyCode = Blazor.platform.toDotNetString(evt.keyCode.toString());
+        Blazor.platform.callMethod(onkeyupMethod, null, [keyCode]);
 
-        };
+    };
 
-        function onKeyUp(element, evt) {
-            const char = Blazor.platform.toDotNetString(evt.key)
-            Blazor.platform.callMethod(onkeyupMethod, null, [char]);
-        }
-    </script>
-    @functions {
-    bool isGameOver = true;
-    public BlazorBricks.Core.BoardViewModel boardViewModel;
-    protected override async Task OnInitAsync()
+    function onKeyUp(element, evt) {
+        const char = Blazor.platform.toDotNetString(evt.key)
+        Blazor.platform.callMethod(onkeyupMethod, null, [char]);
+    }
+</script>
+@functions {
+bool isGameOver = true;
+public BlazorBricks.Core.BoardViewModel boardViewModel;
+protected override async Task OnInitAsync()
+{
+    OnKeyUp.Action = async value =>
     {
-        OnKeyUp.Action = async value =>
-        {
-            ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
+        ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
 
-            switch (consoleKey)
-            {
-                case ConsoleKey.LeftArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
-                    break;
-                case ConsoleKey.RightArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
-                    break;
-                case ConsoleKey.UpArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
-                    break;
-                case ConsoleKey.DownArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
-                    break;
-                default:
-                    break;
-            }
+        switch (consoleKey)
+        {
+            case ConsoleKey.LeftArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
+                break;
+            case ConsoleKey.RightArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
+                break;
+            case ConsoleKey.UpArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
+                break;
+            case ConsoleKey.DownArrow:
+                BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
+                break;
+            default:
+                break;
+        }
+        this.StateHasChanged();
+    };
+
+    boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+
+    Object thisLock = new Object();
+    BlazorBricks.Core.GameManager.Instance.Presenter.Updated
+    += (obj, e) =>
+    {
+        lock (thisLock)
+        {
+            boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
             this.StateHasChanged();
         };
+    };
+}
 
-        boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+void InitializeBoard()
+{
+    BlazorBricks.Core.GameManager.Instance.Presenter.InitializeBoard();
+    boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
 
-        Object thisLock = new Object();
-        BlazorBricks.Core.GameManager.Instance.Presenter.Updated
-        += (obj, e) =>
-        {
-            lock (thisLock)
-            {
-                boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
-                this.StateHasChanged();
-            };
-        };
-    }
+    isGameOver = BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver;
 
-    void InitializeBoard()
-    {
-        BlazorBricks.Core.GameManager.Instance.Presenter.InitializeBoard();
-        boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+    this.StateHasChanged();
+}
 
-        isGameOver = BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver;
-
-        this.StateHasChanged();
-    }
-
-    public void StartTickLoop()
-    {
-        InitializeBoard();
-    }
-    }
+public void StartTickLoop()
+{
+    InitializeBoard();
+}
+}
