@@ -17,8 +17,6 @@ namespace BlazorBricks.Core
             currentBoard.Bricks = new BrickViewModel[] { };
 
             presenter = new BricksPresenter(this);
-            //presenter.InitializeBoard();
-            //presenter.Tick();
         }
 
         public static GameManager Instance
@@ -78,7 +76,7 @@ namespace BlazorBricks.Core
                         {
                             Row = row,
                             Col = col,
-                            Color = b.Color.ToString().Replace("Color [", "").Replace("]", "")
+                            Color = b.Color.ToString()
                         });
                     }
                     else
@@ -87,7 +85,7 @@ namespace BlazorBricks.Core
                         {
                             Row = row,
                             Col = col,
-                            Color = "rgba(0, 0, 0, 1.0)"
+                            Color = "0"
                         });
                     }
                 }

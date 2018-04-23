@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using BlazorBricks.Core.Shapes;
-using System.Drawing;
 
 namespace BlazorBricks.Core
 {
@@ -15,10 +14,9 @@ namespace BlazorBricks.Core
         private double leftMargin = 4;
         private double topMargin = 4;
         private double brickSize = 20;
-        private Color color = Color.White;
+        private ShapeCode color = ShapeCode.I;
 
-
-        public Brick(double x, double y, Color color)
+        public Brick(double x, double y, ShapeCode color)
         {
             this.x = x;
             this.y = y;
@@ -45,7 +43,7 @@ namespace BlazorBricks.Core
             }
         }
 
-        public Color Color
+        public ShapeCode Color
         {
             get
             {

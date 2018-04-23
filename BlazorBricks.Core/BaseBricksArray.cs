@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using BlazorBricks.Core.Shapes;
-using System.Drawing;
+
 
 namespace BlazorBricks.Core
 {
@@ -36,44 +36,6 @@ namespace BlazorBricks.Core
                     }
                 }
             }
-            return ret;
-        }
-
-        protected Color GetShapeColorFromInteger(int c)
-        {
-            Color ret = Color.White;
-
-            switch (c)
-            {
-                case 1:
-                    ret = Color.Blue;
-                    break;
-                case 2:
-                    ret = Color.DarkGray;
-                    break;
-                case 3:
-                    ret = Color.Green;
-                    break;
-                case 4:
-                    ret = Color.Orange;
-                    break;
-                case 5:
-                    ret = Color.LightGray;
-                    break;
-                case 6:
-                    ret = Color.Red;
-                    break;
-                case 7:
-                    ret = Color.Purple;
-                    break;
-                case 8:
-                    ret = Color.White;
-                    break;
-                case 9:
-                    ret = Color.Yellow;
-                    break;
-            }
-
             return ret;
         }
 

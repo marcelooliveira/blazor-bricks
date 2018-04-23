@@ -1,9 +1,9 @@
 using System;
-//using System.Drawing;
+//
 using System.Diagnostics;
 using BlazorBricks.Core;
 using BlazorBricks.Core.Exceptions;
-using System.Drawing;
+
 
 namespace BlazorBricks.Core.Shapes
 {
@@ -14,7 +14,7 @@ namespace BlazorBricks.Core.Shapes
     {
         protected int x = 0;
         protected int y = 0;
-        protected Color color = Color.Black;
+
         protected bool anchored = false;
         protected IBoard containerBoard = null;
 
@@ -31,8 +31,9 @@ namespace BlazorBricks.Core.Shapes
             LoadData(width, height, shapeString);
         }
 
-        public BaseShape(int width, int height, string shapeString)
+        public BaseShape(int width, int height, string shapeString, ShapeCode shapeCode)
         {
+            this.ShapeCode = shapeCode;
             LoadData(width, height, shapeString);
         }
 
@@ -61,7 +62,7 @@ namespace BlazorBricks.Core.Shapes
                         IBrick brick = null;
                         if (nColor > 0)
                         {
-                            brick = new Brick(column, row, GetShapeColorFromInteger(nColor));
+                            brick = new Brick(column, row, ShapeCode);
                         }
                         shapeArray[column, row] = brick;
                         i++;
@@ -241,6 +242,7 @@ namespace BlazorBricks.Core.Shapes
             return test;
         }
 
+
         public int X
         {
             get { return x; }
@@ -253,25 +255,7 @@ namespace BlazorBricks.Core.Shapes
             set { y = value; }
         }
 
-        public Color Color
-        {
-            get {return color;}
-            set
-            {
-                color = value;
-                for (int row = 0; row < height; row++)
-                {
-                    for (int column = 0; column < width; column++)
-                    {
-                        IBrick brick = shapeArray[column, row];
-                        if (brick != null)
-                        {
-                            brick.Color = value;
-                        }
-                    }
-                }
-            }
-        }
+        public ShapeCode ShapeCode { get; private set; }
 
         public IBoard ContainerBoard
         {
@@ -283,19 +267,6 @@ namespace BlazorBricks.Core.Shapes
         { 
             get {return anchored;}
         }
-    }
 
-    //public enum ShapeColor
-    //{
-    //    Black = 0,
-    //    Blue,
-    //    Gold,
-    //    Green,
-    //    Orange,
-    //    Pink,
-    //    Red,
-    //    Violet,
-    //    White,
-    //    Yellow
-    //}
+    }
 }

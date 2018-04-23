@@ -155,10 +155,10 @@ namespace BlazorBricks.Core
         }
     }
 
-    public enum ShapeCodes
+    public enum ShapeCode
     {
-        I = 1,
-        J,
+        J = 1,
+        I,
         L,
         O,
         S,

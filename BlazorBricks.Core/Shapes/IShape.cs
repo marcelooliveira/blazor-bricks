@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-//using System.Drawing;
+//
 using BlazorBricks.Core;
-using System.Drawing;
-//using System.Drawing;
+
+//
 
 namespace BlazorBricks.Core.Shapes
 {
@@ -19,7 +19,6 @@ namespace BlazorBricks.Core.Shapes
         int Y { get; set; }
         int Width { get; }
         int Height { get; }
-        Color Color { get; set; }
         string ShapeString { get; }
         IBrick[,] ShapeArray { get; }
         IBoard ContainerBoard { get; set;}

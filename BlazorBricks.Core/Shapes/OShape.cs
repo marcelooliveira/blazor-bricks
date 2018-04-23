@@ -6,7 +6,7 @@ namespace BlazorBricks.Core.Shapes
 {
     public class OShape : BaseShape
     {
-        public OShape() : base(2, 2, "1111")
+        public OShape() : base(2, 2, "1111", ShapeCode.O)
         {
         }
     }

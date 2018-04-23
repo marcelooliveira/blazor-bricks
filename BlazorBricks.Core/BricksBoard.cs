@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using BlazorBricks.Core.Exceptions;
 using BlazorBricks.Core.Shapes;
-using System.Drawing;
+
 using System.Threading.Tasks;
 
 namespace BlazorBricks.Core
@@ -14,7 +14,7 @@ namespace BlazorBricks.Core
         public event EventHandler Updated;
 
         #region attribute
-        protected Color backColor = Color.LightGray;
+        protected ShapeCode backColor = ShapeCode.I;
         private IShape shape = null;
         private int score = 0;
         private int hiScore = 0;
@@ -280,37 +280,30 @@ namespace BlazorBricks.Core
         {
             IShape newShape = null;
             Random randomClass = new Random();
-            int randomCode = randomClass.Next((int)ShapeCodes.I, (int)ShapeCodes.Z + 1);
+            int randomCode = randomClass.Next((int)ShapeCode.I, (int)ShapeCode.Z + 1);
 
             switch (randomCode)
             {
-                case (int)ShapeCodes.I:
+                case (int)ShapeCode.I:
                     newShape = new StickShape();
-                    newShape.Color = Color.Cyan;
                     break;
-                case (int)ShapeCodes.J:
+                case (int)ShapeCode.J:
                     newShape = new JShape();
-                    newShape.Color = Color.Blue;
                     break;
-                case (int)ShapeCodes.L:
+                case (int)ShapeCode.L:
                     newShape = new LShape();
-                    newShape.Color = Color.Orange;
                     break;
-                case (int)ShapeCodes.O:
+                case (int)ShapeCode.O:
                     newShape = new OShape();
-                    newShape.Color = Color.Yellow;
                     break;
-                case (int)ShapeCodes.S:
+                case (int)ShapeCode.S:
                     newShape = new SShape();
-                    newShape.Color = Color.Green;
                     break;
-                case (int)ShapeCodes.T:
+                case (int)ShapeCode.T:
                     newShape = new TShape();
-                    newShape.Color = Color.Purple;
                     break;
-                case (int)ShapeCodes.Z:
+                case (int)ShapeCode.Z:
                     newShape = new ZShape();
-                    newShape.Color = Color.Red;
                     break;
             }
 
@@ -390,7 +383,7 @@ namespace BlazorBricks.Core
         #endregion methods
 
         #region properties
-        public Color BackColor
+        public ShapeCode BackColor
         {
             get { return backColor; }
             set { backColor = value; }

@@ -184,3 +184,29 @@ button {
     font-size: 20px;
     font-family: arcadepi;
 }
+
+.shapecolor-0 {
+    background-color: #000000;
+}
+
+.shapecolor-I {
+    background-color: #EC9D04;
+}
+.shapecolor-J {
+    background-color: #A16F94;
+}
+.shapecolor-L {
+    background-color: #E3B6A1;
+}
+.shapecolor-O {
+    background-color: #86A2AD;
+}
+.shapecolor-S {
+    background-color: #86A2AD;
+}
+.shapecolor-T {
+    background-color: #02458C;
+}
+.shapecolor-Z {
+    background-color: #C6745F;
+}
