@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BlazorBricks.Core.Shapes;
@@ -17,8 +15,9 @@ namespace BlazorBricks.Core
         private CancellationTokenSource cancellationTokenSource;
         private const int TICK_MS_INTERVAL = 30;
         private const int PROCESS_NEXT_MOVEMENT_MS_INTERVAL = 150;
+        private Object thisLock = new Object();
 
-        public bool IsGameOver { get; private set; } = true;
+        public bool IsGameOver { get; set; } = true;
 
         public BricksPresenter(IView view)
         {
@@ -28,8 +27,6 @@ namespace BlazorBricks.Core
             {
                 Updated?.Invoke(this, e);
             };
-
-            StartTickLoop();
         }
 
         public async Task StartTickLoop()
@@ -41,19 +38,30 @@ namespace BlazorBricks.Core
                {
                    while (!IsGameOver)
                    {
-                       await Task.Delay(TICK_MS_INTERVAL);
-                       bool processMove = BricksBoard.DownPressed;
-                       accumulatedTimeSpan = accumulatedTimeSpan.Add(TimeSpan.FromMilliseconds(TICK_MS_INTERVAL));
-                       if (accumulatedTimeSpan.TotalMilliseconds >= PROCESS_NEXT_MOVEMENT_MS_INTERVAL)
-                       {
-                           processMove = true;
-                           accumulatedTimeSpan = TimeSpan.FromMilliseconds(0);
-                       }
+                       bool processMove = await ExecuteTickLoop();
                        Tick(processMove);
-                    }
+                   }
                }, token);
 
             await task;
+        }
+
+        private async Task<bool> ExecuteTickLoop()
+        {
+            await Task.Delay(TICK_MS_INTERVAL);
+            bool processMove = false;
+
+            lock (thisLock)
+            {
+                processMove = BricksBoard.DownPressed;
+                accumulatedTimeSpan = accumulatedTimeSpan.Add(TimeSpan.FromMilliseconds(TICK_MS_INTERVAL));
+                if (accumulatedTimeSpan.TotalMilliseconds >= PROCESS_NEXT_MOVEMENT_MS_INTERVAL)
+                {
+                    processMove = true;
+                    accumulatedTimeSpan = TimeSpan.FromMilliseconds(0);
+                }
+            }
+            return processMove;
         }
 
         public IView View
@@ -74,8 +82,6 @@ namespace BlazorBricks.Core
         {
             if (view == null)
                 throw new ArgumentNullException("View");
-
-            view.HighlightCompletedRow(row);
         }
 
         public void UpdateScoreView(int score, int hiScore, int lines, int level, IShape next)
@@ -118,15 +124,12 @@ namespace BlazorBricks.Core
 
         public void InitializeBoard()
         {
-            view.Reset();
             BricksBoard.InitializeArray();
-            IsGameOver = false;
         }
 
         public void GameOver()
         {
             cancellationTokenSource.Cancel();
-            //IsGameOver = true;
             view.GameOver();
         }
 

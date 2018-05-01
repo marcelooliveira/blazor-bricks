@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BlazorBricks.Core
 {
-    public class GameManager : BlazorBricks.Core.IView
+    public class GameManager : IView
     {
         private static GameManager instance = null;
         private static BricksPresenter presenter = null;
@@ -43,8 +40,8 @@ namespace BlazorBricks.Core
 
         public void InitializeBoard()
         {
-            presenter.InitializeBoard();
-            currentBoard.IsGameOver = false;
+            //presenter.InitializeBoard();
+            //presenter.IsGameOver = false;
         }
 
         public void DisplayBoard(string arrayString, IBrick[,] brickArray, int width, int height)
@@ -95,17 +92,7 @@ namespace BlazorBricks.Core
 
         public void GameOver()
         {
-            currentBoard.IsGameOver = true;
-        }
-
-        public void HighlightCompletedRow(int row)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void Reset()
-        {
-            currentBoard.IsGameOver = false;
+            presenter.IsGameOver = true;
         }
     }
 
@@ -120,7 +107,6 @@ namespace BlazorBricks.Core
     {
         public BoardViewModel()
         {
-            IsGameOver = true;
         }
 
         public BrickViewModel[] Bricks { get; set; }
@@ -129,6 +115,5 @@ namespace BlazorBricks.Core
         public int Lines { get; set; }
         public int Level { get; set; }
         public BrickViewModel[] Next { get; set; }
-        public bool IsGameOver { get; set; }
     }
 }

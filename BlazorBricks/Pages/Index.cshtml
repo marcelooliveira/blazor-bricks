@@ -21,7 +21,7 @@
         </nav>
         <main>
 
-            @if (BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver)
+            @if (BlazorBricks.Core.GameManager.Instance.Presenter.IsGameOver)
             {
                 <div>
                     <div>
@@ -104,60 +104,59 @@
     }
 </script>
 @functions {
-bool isGameOver = true;
-public BlazorBricks.Core.BoardViewModel boardViewModel;
-protected override async Task OnInitAsync()
-{
-    OnKeyUp.Action = async value =>
+    public BlazorBricks.Core.BoardViewModel boardViewModel;
+    protected override async Task OnInitAsync()
     {
-        ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
-
-        switch (consoleKey)
+        OnKeyUp.Action = async value =>
         {
-            case ConsoleKey.LeftArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
-                break;
-            case ConsoleKey.RightArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
-                break;
-            case ConsoleKey.UpArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
-                break;
-            case ConsoleKey.DownArrow:
-                BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
-                break;
-            default:
-                break;
-        }
-        this.StateHasChanged();
-    };
+            ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
 
-    boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
-
-    Object thisLock = new Object();
-    BlazorBricks.Core.GameManager.Instance.Presenter.Updated
-    += (obj, e) =>
-    {
-        lock (thisLock)
-        {
-            boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+            switch (consoleKey)
+            {
+                case ConsoleKey.LeftArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
+                    break;
+                case ConsoleKey.RightArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
+                    break;
+                case ConsoleKey.UpArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
+                    break;
+                case ConsoleKey.DownArrow:
+                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
+                    break;
+                default:
+                    break;
+            }
             this.StateHasChanged();
         };
-    };
-}
 
-void InitializeBoard()
-{
-    BlazorBricks.Core.GameManager.Instance.Presenter.InitializeBoard();
-    boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+        boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
 
-    isGameOver = BlazorBricks.Core.GameManager.Instance.CurrentBoard.IsGameOver;
+        Object thisLock = new Object();
+        BlazorBricks.Core.GameManager.Instance.Presenter.Updated
+        += (obj, e) =>
+        {
+            lock (thisLock)
+            {
+                boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+                this.StateHasChanged();
+            };
+        };
 
-    this.StateHasChanged();
-}
+        InitializeBoard();
+    }
 
-public void StartTickLoop()
-{
-    InitializeBoard();
-}
+    void InitializeBoard()
+    {
+        BlazorBricks.Core.GameManager.Instance.Presenter.InitializeBoard();
+        boardViewModel = BlazorBricks.Core.GameManager.Instance.CurrentBoard;
+
+        this.StateHasChanged();
+    }
+
+    public void StartTickLoop()
+    {
+        BlazorBricks.Core.GameManager.Instance.Presenter.StartTickLoop();
+    }
 }
