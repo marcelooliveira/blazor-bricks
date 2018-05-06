@@ -7,16 +7,16 @@
         <nav>
             <div class="stats">
                 <StatsInfo Label="SCORE"
-                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Score)" />
+                           Value="@boardViewModel.Score" />
 
                 <StatsInfo Label="HI SCORE"
-                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.HiScore)" />
+                           Value="@boardViewModel.HiScore" />
 
                 <StatsInfo Label="LINES"
-                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Lines)" />
+                           Value="@boardViewModel.Lines" />
 
                 <StatsInfo Label="LEVEL"
-                           Value="@(BlazorBricks.Core.GameManager.Instance.CurrentBoard.Level)" />
+                           Value="@boardViewModel.Level" />
             </div>
         </nav>
         <main>
@@ -104,7 +104,8 @@
     }
 </script>
 @functions {
-    public BlazorBricks.Core.BoardViewModel boardViewModel;
+    BlazorBricks.Core.BoardViewModel boardViewModel;
+
     protected override async Task OnInitAsync()
     {
         OnKeyUp.Action = async value =>
