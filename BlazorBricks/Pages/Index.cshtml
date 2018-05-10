@@ -1,4 +1,8 @@
 ﻿@page "/"
+@{
+    var nextRows = boardViewModel.Next.Max(n => n.Row) + 1;
+    var nextColumns = boardViewModel.Next.Max(n => n.Col) + 1;
+}
 <div class="inside-page">
     <header>
         <img src="img/Title.png" />
@@ -17,6 +21,14 @@
 
                 <StatsInfo Label="LEVEL"
                            Value="@boardViewModel.Level" />
+                <div class="statsLine next-container">
+                    <div>NEXT</div>
+                    <div>
+                        <div class="statsLine next-piece piece-rows-@nextRows piece-columns-@nextColumns">
+                            <BricksBoard Bricks="@boardViewModel.Next" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
         <main>
@@ -53,16 +65,11 @@
 
         </main>
         <aside>
-            @{
-                var rows = boardViewModel.Next.Max(n => n.Row) + 1;
-                var columns = boardViewModel.Next.Max(n => n.Col) + 1;
-            }
             <div class="stats">
                 <div class="statsLine next-container">
                     <div>NEXT</div>
-                    <hr />
                     <div>
-                        <div class="statsLine next-piece piece-rows-@rows piece-columns-@columns">
+                        <div class="statsLine next-piece piece-rows-@nextRows piece-columns-@nextColumns">
                             <BricksBoard Bricks="@boardViewModel.Next" />
                         </div>
                     </div>
@@ -112,19 +119,21 @@
         {
             ConsoleKey consoleKey = (ConsoleKey)Enum.Parse(typeof(ConsoleKey), value);
 
+            var presenter = BlazorBricks.Core.GameManager.Instance.Presenter;
+
             switch (consoleKey)
             {
                 case ConsoleKey.LeftArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveLeft();
+                    presenter.MoveLeft();
                     break;
                 case ConsoleKey.RightArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveRight();
+                    presenter.MoveRight();
                     break;
                 case ConsoleKey.UpArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.Rotate90();
+                    presenter.Rotate90();
                     break;
                 case ConsoleKey.DownArrow:
-                    BlazorBricks.Core.GameManager.Instance.Presenter.MoveDown();
+                    presenter.MoveDown();
                     break;
                 default:
                     break;

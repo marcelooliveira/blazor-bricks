@@ -129,7 +129,7 @@ app {
 
 
 .board {
-    width: 212px;
+    width: 220px;
     background-color: #444;
 }
 
@@ -147,9 +147,9 @@ app {
 
 .colorChip {
     float: left;
-    width: 20px;
-    height: 20px;
-    margin: 0.5px;
+    width: 18px;
+    height: 18px;
+    margin: 2px;
 }
 
 .HolyGrail {
